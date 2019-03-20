@@ -5,7 +5,7 @@ env:
   matrix:
   - URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
   global:
-    secure: KIn1gfboR0+wJUKzh5Go60mbd+IEWNkrUa5f44ZbF98SitJvKn0mnRHBigzay9y/NViPRF9YdUHCkS5tqV6BpBiyfvZC6BcDSJP+ud8eMnumfuUIjw2SqvZPAMKkoKMAIz8tcKu7VhRTPBflEBOxlwoq43p+S8ncSnnhDoBpTW8mBZzEP1ATK9lxOWxJmuq4++0WYnovQPYNyDTAXZaWNl4IEhWvrh0N/+wi+Xv//pCVJXLzR95QJi5WzPDqZjhH0CD2rrl73CihFm7oQNLePKksfCdmHQL+gLjYDOgE9+qfs80YIePePrRc0wt9L4o1vr8bo+GxGYprygnOCJpASFLznPVSdvq1I/4qfTsNxZesjUotNWXV3kocGaFCH/TFIZDIYegDtAEt1+q/vhPb9sSnycmHb0shC/opC0Tey6MURoeuBN060K8iijcufgeV0WWXsVQWqEF7tK/gAqcz8s1Myr8pibo7aNN5v33keKGZj3I/8trdQ92VNbCVcDCczjTNCE0dJEQIqbRwdNYUsx9xalMF8xiASYq6zUn3DmWDikPSUEd8zz7LBWzBqMNKHiwUDtZ/sKaSTqxrkdXvj+XZ4f+zs6unS8x9O6KHJPBkjk053o+ur0kAAxXNbAdC/XYK/Su86Z53HvHJwnotvuEWoEJSAMgXaTWFZ3dEkio=
+    secure: GaS++TJckSRf1thdy524pDwSgxQ+SWFs7v63g2wGv0dgJmFZV2clscyQO1a+OWCh4b9/y2KGnr+8XZ7aEF8JjZ97wnhFuplQl9mEt01YSyCHCysrM0n3A3/Ih8tuiiDvS14hKdR3WEcrb45Qh43jYSULyy1eXJWVvH8h0C8CHn7W370I0EMMdKc+5mk/ixGIScqarmHce/qGjk3TPOvU0VsbroDTNQSoj7IrqHjpRp5XttLBsaHQ0XtpFrA702WBWjqX+pskXyrJZeSsAzM0RIy/n5cnO/xMbksBK+E0AHSLqn3mUXXJCg2JfFLia/w0lwfWZiGgT9RPI3gEfqAaRSQR/aqWiMJ//UCHVVtRdcr1eZbWGyqrZPZx1el7q1z3YCEWyKvazmaYNUZTqnVq6Od8BYV7Ls446n/aBDQF4EBq19ro4gcn92Tw98x1oFoN0a8T7dRQ75SyEvsWXtmhf/bNAG6O5P52dwogdkUL21avalp1BfyE0uFEYZOohglq8WVvigTugymK0+pe6JfKX4nDSePSUPI0oFORnwnfag+hicBaS3VNSKhaWeeG+cqXWiDMoQHJZrSaqGmdDLNhhaJdMbX1l0XhsdMlt44LJaMbuRY4cIschhqoORiHL7Gkb69XT0FMESK85uwroeThExmc0fMOXN83ckAM6EmBGn8=
 before_install:
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key -d
 - export SFDX_AUTOUPDATE_DISABLE=false
@@ -19,7 +19,8 @@ before_install:
 - export PATH=./sfdx/$(pwd):$PATH
 - sfdx --version
 - sfdx plugins --core
-- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --username $USERNAME --jwtkeyfile assets/server.key --setdefaultdevhubusername -a HubOrg 
+- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --username $USERNAME --jwtkeyfile
+  assets/server.key --setdefaultdevhubusername -a HubOrg
 script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg --wait
   2
